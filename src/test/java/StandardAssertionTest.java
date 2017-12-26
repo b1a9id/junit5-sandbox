@@ -18,7 +18,7 @@ class StandardAssertionTest {
 
 		@Test
 		void nameAssertions() {
-			assertAll("name",
+			assertAll("This is name test.",
 					() -> assertEquals("Ryosuke", person.getFirstName()),
 					() -> assertEquals("Uchitate", person.getLastName())
 			);
