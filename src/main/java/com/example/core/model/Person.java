@@ -15,4 +15,8 @@ public class Person {
 	private int age;
 
 	private Gender gender;
+
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
+	}
 }
