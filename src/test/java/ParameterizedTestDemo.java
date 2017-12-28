@@ -1,5 +1,5 @@
 import com.example.core.model.*;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.*;
@@ -148,5 +148,15 @@ class ParameterizedTestDemo {
 	@ValueSource(strings = {"2017/10/10", "2017/12/12"})
 	void javaTimeArgumentConversion(@JavaTimeConversionPattern("yyyy/MM/dd") LocalDate argument) {
 		assertEquals(2017, argument.getYear());
+	}
+
+	/**
+	 * Customizing Display Names
+	 */
+	@DisplayName("Customizing Display Name")
+	@ParameterizedTest(name = "{index} ==> name = ''{0}''")
+	@ValueSource(strings = {"Ryosuke", "Taro", "Hanako"})
+	void customizeDisplayName(String name) {
+		assertNotNull(name);
 	}
 }
