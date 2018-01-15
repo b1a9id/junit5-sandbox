@@ -17,7 +17,7 @@ class DynamicTestDemo {
 		List<Person> people = Arrays.asList(new Person("Ryosuke", "Uchitate", 27, Gender.MAN), new Person("Hanako", "Yamada", 15, Gender.WOMAN));
 		return Arrays.asList(
 				DynamicTest.dynamicTest("1st person test", () -> Assertions.assertEquals("Ryosuke Uchitate", people.get(0).getFullName())),
-				DynamicTest.dynamicTest("1st person test", () -> Assertions.assertEquals("Hanako Yamada", people.get(1).getFullName()))
+				DynamicTest.dynamicTest("2nd person test", () -> Assertions.assertEquals("Hanako Yamada", people.get(1).getFullName()))
 		);
 	}
 
@@ -26,7 +26,7 @@ class DynamicTestDemo {
 		List<Person> people = Arrays.asList(new Person("Ryosuke", "Uchitate", 27, Gender.MAN), new Person("Hanako", "Yamada", 15, Gender.WOMAN));
 		return Arrays.asList(
 				DynamicTest.dynamicTest("1st person test", () -> Assertions.assertEquals("Ryosuke Uchitate", people.get(0).getFullName())),
-				DynamicTest.dynamicTest("1st person test", () -> Assertions.assertEquals("Hanako Yamada", people.get(1).getFullName()))
+				DynamicTest.dynamicTest("2nd person test", () -> Assertions.assertEquals("Hanako Yamada", people.get(1).getFullName()))
 		).iterator();
 	}
 
