@@ -54,8 +54,8 @@ class DynamicTestDemo {
 
 	private String getPersonFormatExpected(int num) {
 		List<String> expectedList = new LinkedList<>();
-		expectedList.add("名前：Ryosuke Uchitate, 年齢：27, 性別：MAN");
-		expectedList.add("名前：Hanako Yamada, 年齢：15, 性別：WOMAN");
+		expectedList.add("Name：Ryosuke Uchitate, Age：27, Gender：MAN");
+		expectedList.add("Name：Hanako Yamada, Age：15, Gender：WOMAN");
 		return expectedList.get(num);
 	}
 }
