@@ -1,14 +1,10 @@
-import com.example.core.model.Gender;
-import com.example.core.model.Person;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DynamicTest;
-import org.junit.jupiter.api.TestFactory;
+import com.example.core.model.*;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.function.ThrowingConsumer;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Stream;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.*;
 
 class DynamicTestDemo {
 
@@ -36,5 +32,30 @@ class DynamicTestDemo {
 				new Person("Ryosuke", "Uchitate", 27, Gender.MAN),
 				new Person("Hanako", "Yamada", 15, Gender.WOMAN)
 		).map(p -> DynamicTest.dynamicTest("fullName", () -> Assertions.assertEquals(p.getFirstName() + " " + p.getLastName(), p.getFullName())));
+	}
+
+	@TestFactory
+	Stream<DynamicTest> personFormatTestStream() {
+		List<Person> people = new LinkedList<>();
+		people.add(new Person("Ryosuke", "Uchitate", 27, Gender.MAN));
+		people.add(new Person("Hanako", "Yamada", 15, Gender.WOMAN));
+		Iterator<Integer> inputGenerator = IntStream.range(0, people.size()).iterator();
+
+		Function<Integer, String> displayNameGenerator = (input) -> "Element : " + input;
+
+		ThrowingConsumer<Integer> testExecutor = (input) -> {
+			Person person = people.get(input);
+			String expected = getPersonFormatExpected(input);
+			Assertions.assertEquals(expected, FormatUtils.person(person));
+		};
+
+		return DynamicTest.stream(inputGenerator, displayNameGenerator, testExecutor);
+	}
+
+	private String getPersonFormatExpected(int num) {
+		List<String> expectedList = new LinkedList<>();
+		expectedList.add("名前：Ryosuke Uchitate, 年齢：27, 性別：MAN");
+		expectedList.add("名前：Hanako Yamada, 年齢：15, 性別：WOMAN");
+		return expectedList.get(num);
 	}
 }
