@@ -92,14 +92,18 @@ class ParameterizedTestDemo {
 	 * Method Source
 	 */
 	@ParameterizedTest
-	@MethodSource("fullNameProvider")
+	@MethodSource({"fullNameProvider1", "fullNameProvider2"})
 	void methodSourceStream(String fullName) {
 		assertNotNull(fullName);
 		assertTrue(fullName.contains(" "));
 	}
 
-	static Stream<String> fullNameProvider() {
+	static Stream<String> fullNameProvider1() {
 		return Stream.of("Ryosuke Uchitate", "Taro Uchitate");
+	}
+
+	static Stream<String> fullNameProvider2() {
+		return Stream.of("Michael Jackson", "Janet Jackson");
 	}
 
 	@ParameterizedTest
