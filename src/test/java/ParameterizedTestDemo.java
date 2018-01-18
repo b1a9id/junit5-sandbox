@@ -136,14 +136,18 @@ class ParameterizedTestDemo {
 	 */
 	@ParameterizedTest
 	@ArgumentsSource(MyArgumentProvider.class)
-	void argumentSourceArgumentsStream(int arg) {
-		assertTrue(arg > 0);
+	void argumentSourceArgumentsStream(Person arg) {
+		assertNotNull(arg);
+		assertTrue(arg.getFullName().contains(" "));
+		assertFalse(arg.getAge() < 0);
 	}
 
 	static class MyArgumentProvider implements ArgumentsProvider {
 		@Override
 		public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
-			return Stream.of(1, 2).map(Arguments::of);
+			Person personA = new Person("Ryosuke", "Uchitate", 27, Gender.MAN);
+			Person personB = new Person("Taro", "Uchitate", 20, Gender.MAN);
+			return Stream.of(personA, personB).map(Arguments::of);
 		}
 	}
 
