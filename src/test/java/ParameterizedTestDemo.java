@@ -136,14 +136,14 @@ class ParameterizedTestDemo {
 	 */
 	@ParameterizedTest
 	@ArgumentsSource(MyArgumentProvider.class)
-	void argumentSourceArgumentsStream(String arg) {
-		assertNotNull(arg);
+	void argumentSourceArgumentsStream(int arg) {
+		assertTrue(arg > 0);
 	}
 
 	static class MyArgumentProvider implements ArgumentsProvider {
 		@Override
 		public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
-			return Stream.of("foo", "bar").map(Arguments::of);
+			return Stream.of(1, 2).map(Arguments::of);
 		}
 	}
 
