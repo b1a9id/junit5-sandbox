@@ -79,6 +79,16 @@ class ParameterizedTestDemo {
 	}
 
 	/**
+	 * CSV File Source
+	 */
+	@ParameterizedTest
+	@CsvFileSource(resources = "test.csv")
+	void csvFileSource(String first, int second) {
+		assertNotNull(first);
+		assertNotEquals(0, second);
+	}
+
+	/**
 	 * Method Source
 	 */
 	@ParameterizedTest
