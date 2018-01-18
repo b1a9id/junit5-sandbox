@@ -43,9 +43,15 @@ class ParameterizedTestDemo {
 	 * Enum Source
 	 */
 	@ParameterizedTest
+	@EnumSource(Gender.class)
+	void enumSourceAll(Gender gender) {
+		assertTrue(Arrays.asList(Gender.values()).contains(gender));
+	}
+
+	@ParameterizedTest
 	@EnumSource(value = Gender.class, names = {"MAN", "WOMAN"})
 	void enumSourceInclude(Gender gender) {
-		assertTrue(Arrays.asList(Gender.values()).contains(gender));
+		assertTrue(Arrays.asList(Gender.MAN, Gender.WOMAN).contains(gender));
 	}
 
 	@ParameterizedTest
