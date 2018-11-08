@@ -1,11 +1,9 @@
 package easy;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.example.core.model.Gender;
 import com.example.core.model.Person;
-import com.sun.xml.internal.ws.developer.UsesJAXBContext;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
