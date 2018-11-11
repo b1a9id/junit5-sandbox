@@ -7,14 +7,12 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.ArgumentConversionException;
 import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.converter.JavaTimeConversionPattern;
 import org.junit.jupiter.params.converter.SimpleArgumentConverter;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -24,6 +22,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import com.example.core.model.Gender;
 import com.example.core.model.Person;
+
+import argumentprovider.MyArgumentProvider;
 
 import static com.example.core.model.Gender.UNISEX;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -161,15 +161,6 @@ class ParameterizedTestDemo {
 		assertNotNull(arg);
 		assertTrue(arg.getFullName().contains(" "));
 		assertFalse(arg.getAge() < 0);
-	}
-
-	static class MyArgumentProvider implements ArgumentsProvider {
-		@Override
-		public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
-			Person personA = new Person("Ryosuke", "Uchitate", 27, Gender.MAN);
-			Person personB = new Person("Taro", "Uchitate", 20, Gender.MAN);
-			return Stream.of(personA, personB).map(Arguments::of);
-		}
 	}
 
 	/**
