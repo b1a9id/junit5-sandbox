@@ -1,5 +1,5 @@
 package com.example.core.model;
 
 public enum Gender {
-	MAN, WOMAN
+	MAN, WOMAN, UNISEX
 }

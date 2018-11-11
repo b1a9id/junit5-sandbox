@@ -1,15 +1,36 @@
-import com.example.core.model.*;
-import org.junit.jupiter.api.*;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.converter.*;
-import org.junit.jupiter.params.provider.*;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.ConvertWith;
+import org.junit.jupiter.params.converter.JavaTimeConversionPattern;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.*;
+import com.example.core.model.Gender;
+import com.example.core.model.Person;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static com.example.core.model.Gender.UNISEX;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParameterizedTestDemo {
 
@@ -58,7 +79,7 @@ class ParameterizedTestDemo {
 	@EnumSource(value = Gender.class, names = {"MAN"}, mode = EnumSource.Mode.EXCLUDE)
 	void enumSourceExclude(Gender gender) {
 		assertFalse(Collections.singleton(Gender.MAN).contains(gender));
-		assertEquals(Gender.WOMAN, gender);
+		assertTrue(Arrays.asList(Gender.WOMAN, UNISEX).contains(gender));
 	}
 
 	@ParameterizedTest
