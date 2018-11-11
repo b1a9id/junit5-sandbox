@@ -1,8 +1,20 @@
-import com.example.core.model.*;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assumptions.*;
+import com.example.core.model.Gender;
+import com.example.core.model.Person;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 class StandardAssertionTest {
 
@@ -91,16 +103,20 @@ class StandardAssertionTest {
 		@Test
 		void validTest() {
 			assumeTrue("/Users/uchitate".equals(System.getenv("HOME")));
+			assertTrue("test".length() == 4);
 		}
 
 		@Test
 		void invalidTest() {
-			assumeFalse("/Users/uchitate".equals(System.getenv("HOME")), () -> "This is invalid.");
+			assumeFalse("/Users/uchitate".equals(System.getenv("TEST")), () -> "This is invalid.");
 		}
 
 		@Test
 		void executeTestWhenValid() {
-			assumeTrue("/Users/uchitate".equals(System.getenv("HOME")));
+			assumingThat("/Users/uchitate".equals(System.getenv("HOME")),
+					() -> {
+						assertFalse("test".length() == 2);
+					});
 			assertTrue("test".length() == 4);
 		}
 	}
