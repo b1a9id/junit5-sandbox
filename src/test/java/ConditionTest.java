@@ -1,3 +1,6 @@
+import java.time.LocalTime;
+import java.time.ZoneId;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.jupiter.api.condition.DisabledOnJre;
@@ -7,6 +10,8 @@ import org.junit.jupiter.api.condition.EnabledOnJre;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.condition.OS;
+
+import condition.DisabledOnTime;
 
 class ConditionTest {
 
@@ -44,5 +49,12 @@ class ConditionTest {
     @DisabledIfEnvironmentVariable(named = "HOME", matches = "/Users/uchitate")
     void disabledOnHomeMatch() {
         System.out.println("This is disabled test on Home is /Users/uchitate");
+    }
+
+    @Test
+    @DisabledOnTime(from = "22:00", to = "22:59", zoneId = "JST")
+    void enabledOnTime() {
+        LocalTime now = LocalTime.now(ZoneId.of("JST", ZoneId.SHORT_IDS));
+        System.out.println("This is executed test :" + now);
     }
 }
